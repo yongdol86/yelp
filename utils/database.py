@@ -9,10 +9,6 @@ class RDB:
             self.config = DATABASES[alias]
             self.engine = self.config['ENGINE']
 
-            # NOTE: pymysql compatible
-            if self.config.get('SSL_REQUIRED') is True:
-                kwargs['ssl'] = {'ssl': {'ca': self.config['SSL_CA']}}
-
             if 'mysql' in self.engine:
                 self.conn = pymysql.connect(
                     database=self.config['NAME'],

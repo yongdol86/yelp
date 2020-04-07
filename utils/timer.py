@@ -3,10 +3,6 @@ from functools import wraps
 
 
 def timer(func):
-    '''
-    decorator function to automatically add timer
-    '''
-
     @wraps(func)
     def _wrapper(*args, **kwargs):
         timer = Timer()
@@ -36,7 +32,6 @@ class Timer:
         if self.label:
             print(f'{self.label} started')
 
-    # TODO: debug 플래그 켜졌을 때만 출력하도록 바꾸기?
     def stop(self):
         if self._start_time is None:
             raise RuntimeError

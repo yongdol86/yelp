@@ -1,10 +1,7 @@
-import ast
-import json
 import pandas as pd
-from sqlalchemy import create_engine
 
 from utils.data_convert import string_to_dict, get_start_close_time
-from utils.database import RDB
+from utils.database import insert_alchemy
 from utils.timer import Timer
 
 
@@ -12,16 +9,6 @@ desired_width = 320
 display_max_columns = 20
 pd.set_option('display.width', desired_width)
 pd.set_option('display.max_columns', display_max_columns)
-
-
-def insert_alchemy(df):
-    # sql alchemy
-    engine = create_engine("mysql+pymysql://root:"+"asdf"+"@127.0.0.1:3306/yelp?charset=utf8", encoding='utf-8')
-    conn = engine.connect()
-    time.start('insert mysql')
-    df.to_sql(name='business_hours', con=engine, if_exists='append', index=False)
-    time.stop()
-    conn.close()
 
 
 def daily_opening_hours(json_hours_data):
@@ -59,10 +46,6 @@ def daily_opening_hours(json_hours_data):
 
 
 def insert_business(df):
-    # attributes, hours
-    # df_att = df['attributes']
-    # del df['attributes']
-
     df_hours = df[['business_id', 'hours']].dropna()
     df_hours['hours'] = df_hours['hours'].apply(string_to_dict)
     time.start('make hours list')
@@ -79,18 +62,18 @@ def insert_business(df):
 
     del df['hours']
     daily_opening_hours(df_hours)
-    insert_alchemy(df_hours)
-    # df['attributes_id'] = None
-    # df['hours_id'] = None
+    insert_alchemy(df_hours, 'local_whyzoo', 'business_hours', 'replace')
+
+    df['attributes_id'] = None
+    df['hours_id'] = None
     # print(df)
-    # insert_alchemy(df)
-
-
+    # insert_alchemy(df, 'local_whyzoo', 'business', 'replace')
 
 
 if __name__ == "__main__":
     time = Timer()
-    csv_file = '/Users/yongjoolim/Project/yelp/yelp-dataset/business.csv'
+    # csv_file = '/Users/yongjoolim/Project/yelp/yelp-dataset/business.csv'
+    csv_file = "C:\\sentience\\yelp\\yelp-dataset\\business.csv"
 
     time.start('read csv')
     business_df = pd.read_csv(csv_file)

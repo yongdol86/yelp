@@ -60,7 +60,7 @@ def insert_business(df):
               'sunday_open', 'sunday_close',
               ]] = pd.DataFrame(df_hours.hours.values.tolist(), index=df_hours.index)
 
-    del df['hours']
+    del df_hours['hours']
     daily_opening_hours(df_hours)
     insert_alchemy(df_hours, 'local_whyzoo', 'business_hours', 'replace')
 

@@ -37,6 +37,7 @@ def insert_mysql(json_file, chunk_size):
                 insert_chekin_sql = """INSERT INTO checkin (`business_id`, `date`) VALUES (%(business_id)s, %(date)s)"""
                 time.start('insert {} lines'.format(len(checkin_insert_list)))
                 cur.executemany(insert_chekin_sql, checkin_insert_list)
+                cnx.commit()
                 time.stop()
                 checkin_insert_list = []
 
@@ -44,6 +45,7 @@ def insert_mysql(json_file, chunk_size):
                 pass
     cur.close()
     cnx.close()
+
 
 if __name__ == "__main__":
 

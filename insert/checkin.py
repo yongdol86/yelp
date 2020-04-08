@@ -50,14 +50,11 @@ def insert_mysql(json_file, chunk_size):
 if __name__ == "__main__":
 
     time = Timer()
-    # json_file = "/Users/yongjoolim/Project/yelp/yelp-dataset/checkin.json"
-    json_file = "C:\\sentience\\yelp\\yelp-dataset\\checkin.json"
+    json_file = "/Users/yongjoolim/Project/yelp/yelp-dataset/checkin.json"
 
-    # file_type = json_file.split('/')[6].split('.')[0]
-    file_type = json_file.split('\\')[4].split('.')[0]
+    file_type = json_file.split('/')[6].split('.')[0]
 
-    # output_file = "/Users/yongjoolim/Project/yelp/yelp-dataset/{}.output".format(file_type)
-    output_file = "C:\\sentience\\yelp\\yelp-dataset\\{}.output".format(file_type)
+    output_file = "/Users/yongjoolim/Project/yelp/yelp-dataset/{}.output".format(file_type)
 
     print("file : ", json_file)
     print("output_file : ", output_file)

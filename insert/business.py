@@ -77,8 +77,7 @@ def insert_business(df):
 
 if __name__ == "__main__":
     time = Timer()
-    # csv_file = '/Users/yongjoolim/Project/yelp/yelp-dataset/business.csv'
-    csv_file = "C:\\sentience\\yelp\\yelp-dataset\\business.csv"
+    csv_file = '/Users/yongjoolim/Project/yelp/yelp-dataset/business.csv'
 
     time.start('read csv')
     business_df = pd.read_csv(csv_file)

@@ -1,7 +1,10 @@
 import pandas as pd
 from utils.timer import Timer
 import matplotlib.pyplot as plt
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0d976db7cfad87e040ef247b385c9ce0632a91e5
 
 desired_width = 320
 display_max_columns = 20
@@ -78,5 +81,3 @@ if __name__ == "__main__":
     # each year
     for business_id in business_id_list:
         checkin_cnt('2017-01', '2018-12', insert_checkin_df, business_id)
-
-

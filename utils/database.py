@@ -2,6 +2,7 @@ import pymysql
 from sqlalchemy import create_engine
 
 from config import DATABASES
+from utils.timer import timer
 
 
 def pymysql_connect(server, **kwargs):
@@ -18,11 +19,8 @@ def pymysql_connect(server, **kwargs):
 
 
 def insert_alchemy(df, server, table_name, method):
-    # sql alchemy
-    engine = create_engine("mysql+pymysql://{}:"+"{}"+"@{}:{}/{}?charset=utf8".format(DATABASES[server]['USER'],
-                                                                                      DATABASES[server]['PASSWORD'],
-                                                                                      DATABASES[server]['HOST'],
-                                                                                      DATABASES[server]['PORT']), encoding='utf-8')
+    DB_URL = f"mysql+pymysql://{DATABASES[server]['USER']}:{DATABASES[server]['PASSWORD']}@{DATABASES[server]['HOST']}:{DATABASES[server]['PORT']}/{DATABASES[server]['NAME']}?charset=utf8"
+    engine = create_engine(DB_URL, encoding='utf-8')
     conn = engine.connect()
     df.to_sql(name=table_name, con=engine, if_exists=method, index=False)
     conn.close()

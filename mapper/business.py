@@ -46,8 +46,11 @@ def daily_opening_hours(json_hours_data):
 
 
 def insert_business(df):
+    del df['attributes']
+    del df['categories']
     df_hours = df[['business_id', 'hours']].dropna()
     df_hours['hours'] = df_hours['hours'].apply(string_to_dict)
+    del df['hours']
     time.start('make hours list')
     df_hours['hours'] = df_hours['hours'].apply(daily_opening_hours)
     time.stop()
@@ -62,12 +65,14 @@ def insert_business(df):
 
     del df_hours['hours']
     daily_opening_hours(df_hours)
-    insert_alchemy(df_hours, 'local_whyzoo', 'business_hours', 'replace')
+    time.start('insert business_hours')
+    insert_alchemy(df_hours, 'mysql', 'business_hours', 'append')
+    time.stop()
 
-    df['attributes_id'] = None
+    time.start('insert business')
     df['hours_id'] = None
-    # print(df)
-    # insert_alchemy(df, 'local_whyzoo', 'business', 'replace')
+    insert_alchemy(df, 'mysql', 'business', 'append')
+    time.stop()
 
 
 if __name__ == "__main__":

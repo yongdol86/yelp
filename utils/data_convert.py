@@ -11,7 +11,7 @@ def get_start_close_time(data):
         close_time = close.time()
         return_list = [start_time.strftime('%H:%M'), close_time.strftime('%H:%M')]
     else:
-        return_list = ["None", "None"]
+        return_list = [None, None]
     return return_list
 
 

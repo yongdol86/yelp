@@ -1,5 +1,6 @@
 import pandas as pd
 
+from config import FILE_DIR
 from utils.data_convert import string_to_dict, get_start_close_time
 from utils.database import insert_alchemy
 from utils.timer import Timer
@@ -76,7 +77,9 @@ def insert_business(df):
 
 if __name__ == "__main__":
     time = Timer()
-    csv_file = '/Users/yongjoolim/Project/yelp/yelp-dataset/business.csv'
+    csv_file = FILE_DIR['review']['csv_file_dir']
+
+    print("file : ", csv_file)
 
     time.start('read csv')
     business_df = pd.read_csv(csv_file)

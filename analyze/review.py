@@ -1,5 +1,4 @@
 import pandas as pd
-from utils.timer import Timer
 import matplotlib.pyplot as plt
 
 

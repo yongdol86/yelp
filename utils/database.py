@@ -1,8 +1,6 @@
 import pymysql
 from sqlalchemy import create_engine
-
 from config import DATABASES
-from utils.timer import timer
 
 
 def pymysql_connect(server, **kwargs):

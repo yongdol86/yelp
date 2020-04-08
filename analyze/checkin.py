@@ -1,10 +1,7 @@
 import pandas as pd
 from utils.timer import Timer
 import matplotlib.pyplot as plt
-<<<<<<< HEAD
 
-=======
->>>>>>> 0d976db7cfad87e040ef247b385c9ce0632a91e5
 
 desired_width = 320
 display_max_columns = 20

@@ -12,7 +12,6 @@ pd.set_option('display.max_columns', display_max_columns)
 
 
 def daily_opening_hours(json_hours_data):
-
     monday_open = get_start_close_time(json_hours_data.get('Monday'))[0]
     monday_close = get_start_close_time(json_hours_data.get('Monday'))[1]
     tuesday_open = get_start_close_time(json_hours_data.get('Tuesday'))[0]

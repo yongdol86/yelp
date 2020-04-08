@@ -1,9 +1,6 @@
 import pandas as pd
-from sqlalchemy import create_engine
-from utils.database import RDB
 from utils.timer import Timer
 import matplotlib.pyplot as plt
-import seaborn as sns
 
 desired_width = 320
 display_max_columns = 20
@@ -49,18 +46,11 @@ def checkin_cnt(start_date, end_date, df, business_id):
         del df4
         plt.title(title)
         plt.figure(figsize=(10, 8))
-        # chart = sns.lineplot(data=df5, x='year-month', y='count', markers='o')
         plt.plot(df5['year-month'], df5['count'], marker='o', markersize=4)
-        # chart.set_xticklabels(chart.get_xticklabels(), rotation=45, horizontalalignment='right')
         plt.xticks(rotation=45, horizontalalignment='right')
         plt.xlabel('year-month')
         plt.ylabel('count')
         plt.legend(['checkin-count'], fontsize=12, loc='best')
-        # rects = chart.patches
-        # labels = df5.values
-        # for rect, label in zip(rects, labels):
-        #     height = rect.get_height()
-        #     chart.text(rect.get_x() + rect.get_width() / 2, height + 5, label, ha='center', va='bottom')
         plt.show()
         time.stop()
         return df5
@@ -101,7 +91,7 @@ if __name__ == "__main__":
     checkin_cnt_min = 10000
     business_id_list = [
         '-kG0N8sBhBotMbu0KVSPaw',
-        # '3kdSl5mo9dWC4clrQjEDGg',
+        '3kdSl5mo9dWC4clrQjEDGg',
         # 'vHz2RLtfUMVRPFmd7VBEHA'
     ]
 
@@ -110,5 +100,5 @@ if __name__ == "__main__":
 
     # each year
     for business_id in business_id_list:
-        checkin_cnt('2017-01', '2018-12', insert_checkin_df, business_id)
+        checkin_cnt('2013-01', '2019-12', insert_checkin_df, business_id)
         # checkin_cnt('2019-01', '2019-12', insert_checkin_df, business_id)
